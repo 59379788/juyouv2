@@ -1,0 +1,215 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">{{form.title}}</h1>
+</div>
+
+
+<div class="wrapper-md" >
+
+  <div class="panel panel-default">
+    <div class="panel-heading font-bold" 
+      ng-if="form.formtitle"
+    >
+      {{form.formtitle}}
+    </div>
+    <div class="panel-body">
+      <form name="form1" class="form-horizontal form-validation" >
+
+      <div ng-repeat="ele in form.elements">
+
+      	<div ng-if="ele.type == 'text'">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" 
+          for={{ele.id}}>{{ele.title}}</label>
+          <div class="col-sm-10">
+            <input id={{ele.id}} type="text" class="form-control" 
+            placeholder={{ele.placeholder}} 
+            ng-model="form.result[ele.id]"
+            ng-required={{ele.required}}
+            ng-disabled={{ele.disabled}}
+            >
+            <span class="help-block m-b-none">{{ele.tip}}</span>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
+
+        <div ng-if="ele.type == 'number'">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" 
+          for={{ele.id}}>{{ele.title}}</label>
+          <div class="col-sm-10">
+            <input id={{ele.id}} type="number" class="form-control" 
+            placeholder={{ele.placeholder}} 
+            ng-model="form.result[ele.id]"
+            ng-required={{ele.required}}
+            ng-disabled={{ele.disabled}}
+            >
+            <span class="help-block m-b-none">{{ele.tip}}</span>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
+
+        <div ng-if="ele.type == 'static'">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">{{ele.title}}</label>
+          <div class="col-sm-10">
+            <p class="form-control-static">{{ele.value}}</p>
+          </div>
+        </div>                    
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
+
+
+        <div ng-if="ele.type == 'checkbox'">
+          <div class="form-group">
+          <label class="col-sm-2 control-label">{{ele.title}}</label>
+
+            <div class="col-sm-10">
+                <label ng-repeat="item in ele.info"
+                class="i-checks checkbox-inline">
+                  <input type="checkbox" value={{item.value}}
+                  ng-checked="form.result[ele.id][item.value] == item.value"
+                  name={{ele.id}}
+                  ng-model="form.result[ele.id][item.value]"
+                  >
+                  <i></i>
+                  {{item.name}}
+                </label>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
+
+
+
+        <div ng-if="ele.type == 'radiobutton'">
+          <div class="form-group">
+          <label class="col-sm-2 control-label">{{ele.title}}</label>
+            <div class="col-sm-10">
+                <label ng-repeat="item in ele.info"
+                class="i-checks  checkbox-inline">
+                  <input type="radio" value={{item.value}} name={{ele.id}}
+                  ng-checked="form.result[ele.id] == item.value"
+                  ng-model="form.result[ele.id]"
+                  >
+                  <i></i>
+                  {{item.name}}
+                </label>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
+
+
+
+
+        <div ng-if="ele.type == 'select'">
+          <div class="form-group">
+          <label class="col-sm-2 control-label">{{ele.title}}</label>
+            <div class="col-sm-10">
+                <ui-select ng-model="form.result[ele.id]" theme="bootstrap"
+                >
+                  <ui-select-match placeholder="请选择一个......">{{$select.selected.name}}</ui-select-match>
+                  <ui-select-choices 
+                  repeat="item.value as item in ele.info | filter: $select.search">
+                    <span ng-bind-html="item.name | highlight: $select.search"></span>
+                  </ui-select-choices>
+                </ui-select>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
+
+
+
+        <div ng-if="ele.type == 'date1'">
+          <div class="form-group">
+          <label class="col-sm-2 control-label">{{ele.title}}</label>
+            <div class="col-sm-10">
+              <div class="input-group w-md">
+                <input type="text" class="form-control" 
+                datepicker-popup="yyyy-MM-dd" 
+                ng-model="form.dateshow[ele.id].label" 
+                is-open="form.dateshow[ele.id].opened" 
+                ng-required="true" close-text="Close" readonly
+                />
+                <span class="input-group-btn" >
+                  <button type="button" class="btn btn-default" 
+                  ng-click="form.open($event, form.dateshow[ele.id])">
+                  <i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+        
+
+        <div ng-if="ele.type == 'switch'">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ele.title}}</label>
+            <div class="col-sm-10">
+              <label class="i-switch m-t-xs m-r">
+                <input type="checkbox" 
+                  ng-checked="ele.value == ele.open"
+                  name={{ele.id}}
+                  ng-true-value="'{{ele.open}}'"
+                  ng-false-value="'{{ele.close}}'"
+                  ng-model="form.result[ele.id]"
+                  ng-click="ele.click(form)"
+                >
+                <i></i>
+              </label>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
+
+
+        <div ng-if="ele.type == 'textarea'">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ele.title}}</label>
+            <div class="col-sm-10">
+              <div text-angular ng-model="form.result[ele.id]"
+                ng-if="ele.state != 'normal'"
+              ></div>
+              <textarea class="form-control" rows="3"
+              ng-model="form.result[ele.id]"
+                ng-if="ele.state == 'normal'"
+              ></textarea>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
+        
+
+      </div>
+        
+       
+      <div class="form-group" ng-if="form.showbutton == true">
+        <div class="col-sm-4 col-sm-offset-2">
+          <button type="submit" class="btn btn-default">取消</button>
+          <button type="submit" class="btn btn-primary"
+          ng-click="form.gogogo(form.result)"
+          >提交</button>
+        </div>
+      </div> 
+
+
+
+      </form>
+    </div>
+  </div>
+
+
+
+</div>
