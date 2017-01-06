@@ -70,6 +70,7 @@ require('./01dashboard/app');
 require('./02product/app');
 require('./03sys/app');
 require('./04permission/app');
+require('./05login/app');
 require('./995util/app');
 require('./996tpl/app');
 require('./997test/app');
@@ -131,6 +132,7 @@ var juyou = angular.module('app', [
     'product',
     'sys',
     'permission',
+    'login',
     'util',
     'juyoutpl',
     'test', 
