@@ -203,6 +203,46 @@ var router = function($urlRouterProvider, $stateProvider){
             }
         }
     })
+
+
+    //接口入参
+    .state('app.sys_interface_req', {
+        url: "/sys/interfacereq/:id",
+        views: {
+            'main@' : {
+                template : require('../996tpl/views/table.html'),
+                controller : 'interfacereq',
+            }
+        },
+        resolve:{
+            tableconfig : function(tableservice){
+                return tableservice.tableconfig();
+            },
+            // urllist : function(sysservice){
+            //     return sysservice.urllist();
+            // }
+        }
+    })
+
+
+    //接口出参
+    .state('app.sys_interface_res', {
+        url: "/sys/interfaceres/:id",
+        views: {
+            'main@' : {
+                template : require('./views/interfaceres.html'),
+                controller : 'interfaceres',
+            }
+        },
+        resolve:{
+            // tableconfig : function(tableservice){
+            //     return tableservice.tableconfig();
+            // },
+            // urllist : function(sysservice){
+            //     return sysservice.urllist();
+            // }
+        }
+    })
     
  	//创建接口
     .state('app.sys_interface_create', {

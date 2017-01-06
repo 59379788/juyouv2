@@ -7,6 +7,8 @@ App.controller('interfacelist',require('./controllers/interfacelist'));
 App.controller('interfacecreate',require('./controllers/interfacecreate'));
 App.controller('interfaceinfo',require('./controllers/interfaceinfo'));
 App.controller('interfaceedit',require('./controllers/interfaceedit'));
+App.controller('interfacereq',require('./controllers/interfacereq'));
+App.controller('interfaceres',require('./controllers/interfaceres'));
 
 App.controller('systemlist',require('./controllers/systemlist'));
 App.controller('systemcreate',require('./controllers/systemcreate'));

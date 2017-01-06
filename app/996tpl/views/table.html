@@ -19,6 +19,12 @@
         <button class="btn m-b-xs w-xs btn-success"
           ng-click="table.search()"
         >搜索</button>
+
+        <button class="btn m-b-xs w-xs btn-primary" 
+          ng-repeat="btn in table.btns"
+          ng-click="btn.click()"
+        >{{btn.name}}</button>
+
         </div>
       </div>
     </div>

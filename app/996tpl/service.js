@@ -51,6 +51,8 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
     vm.title = '';
 
     vm.info = {};   //详情方法。
+    vm.btns = [];
+    vm.urlpara = {};
     
     vm.start = function(scope, config){
 
@@ -65,16 +67,20 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
         vm.page = '';
         vm.title = '';
         vm.info = {};   //详情方法。
+        vm.btns = [];
+        vm.urlpara = {};
 
         var config = angular.extend({}, angular.isObject(config) ? config : {});
 
         var url = vm.url = config.url,   //必填
+            urlpara = vm.urlpara = config.para,
             col = config.col,   //必填
             btn = vm.btn = config.btn,
             search = vm.searcharr = config.search,
             dataprop = config.dataprop || 'data.results',
             page = vm.page = config.page || 'yes',
             title = vm.title = config.title || '',
+            btns = vm.btns = config.btns || [];
             multi = vm.multi = config.multi || false,   //多表格情况
 
             //--------------  详情默认方法 -------------------------//
@@ -408,6 +414,8 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
             }
         }
         //------ 搜索参数 --------------------------------// 
+
+        para = angular.extend(para, vm.urlpara);
 
         console.log(para);
 

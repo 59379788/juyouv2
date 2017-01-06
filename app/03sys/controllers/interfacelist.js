@@ -50,8 +50,9 @@ module.exports = function($scope, tableconfig, urllist, $state){
 		alert('paraout');
 	}
 
-	$scope.parain = function(){
-		alert('parain');
+	$scope.parain = function(item){
+		console.log(item);
+		$state.go('app.sys_interface_req', {'id' : item.id});
 	}
 
 };

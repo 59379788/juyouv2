@@ -1,5 +1,15 @@
 module.exports = function($scope, $state){
 
-	FormWizard.init();
 
+	$scope.steps = {
+		'percent' : 5,
+		'step1' : true,
+		'step2' : false,
+		'step3' : false,
+	}
+
+
+
+
+	
 };
