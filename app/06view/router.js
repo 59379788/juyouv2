@@ -48,41 +48,41 @@ var router = function($urlRouterProvider, $stateProvider){
 
 
     //系统详情
-    .state('app.sys_system_info', {
-        url: "/sys/systeminfo/:id",
+    .state('app.sys_view_info', {
+        url: "/sys/viewinfo/:id",
         views: {
             'main@' : {
                 template : require('../996tpl/views/form.html'),
-                controller : 'systeminfo',
+                controller : 'viewinfo',
             }
         },
         resolve:{
             formconfig : function(formservice){
                 return formservice.formconfig();
             },
-            systemmodel : function(sysservice){
-                return sysservice.systemmodel;
+            viewmodel : function(viewservice){
+                return viewservice.viewmodel;
             }
         }
     })
 
 
 
-    //系统编辑
-    .state('app.sys_system_edit', {
-        url: "/sys/systemedit/:id",
+    //景区编辑
+    .state('app.sys_view_edit', {
+        url: "/sys/viewedit/:id",
         views: {
             'main@' : {
                 template : require('../996tpl/views/form.html'),
-                controller : 'systemedit',
+                controller : 'viewedit',
             }
         },
         resolve:{
             formconfig : function(formservice){
                 return formservice.formconfig();
             },
-            systemmodel : function(sysservice){
-                return sysservice.systemmodel;
+            viewmodel : function(viewservice){
+                return viewservice.viewmodel;
             }
         }
     })
