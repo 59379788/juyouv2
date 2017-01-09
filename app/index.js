@@ -151,7 +151,11 @@ juyou.controller('AppCtrl', require('./main'));
 
 juyou.config(function($qProvider, $stateProvider,   $urlRouterProvider){
 
-    //$qProvider.errorOnUnhandledRejections(false);
+
+    if(angular.isFunction($qProvider.errorOnUnhandledRejections))
+    {
+        $qProvider.errorOnUnhandledRejections(false);
+    }
 
     $urlRouterProvider.otherwise('/app/supplier_dashboard');
 
