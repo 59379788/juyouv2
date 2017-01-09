@@ -147,8 +147,10 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
         }
 
         vm.scope = scope;
+        var tableDOM = 't<"row"<"col-xs-6"i><"col-xs-6"p>>';
         if(page === 'no') {
             dataprop = 'data';
+            tableDOM = 't<"row">'
         }
         //----------- 搜索 -----------------------//
         //初始化搜索项
@@ -161,13 +163,15 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
 
         console.log(vm.searchformarr);
 
+
+
         vm.dtOptions = DTOptionsBuilder.newOptions()
 
             //.withPaginationType('full_numbers')
             .withDataProp(dataprop)
             .withLanguage(language)
             //.withDOM('t<"row"<"col-xs-2 pt5"l><"col-xs-4"i><"col-xs-6"p>>')
-            .withDOM('t<"row"<"col-xs-6"i><"col-xs-6"p>>')
+            .withDOM(tableDOM)
             .withOption('processing', true)
             .withOption('serverSide', true)
             .withOption('createdRow', createdRow)

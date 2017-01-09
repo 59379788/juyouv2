@@ -90,7 +90,7 @@ require('./00pageframework/css/app.css');
 
 
 var juyou = angular.module('app', [
-    'ngAnimate',
+    // 'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngSanitize',
@@ -151,7 +151,7 @@ juyou.controller('AppCtrl', require('./main'));
 
 juyou.config(function($qProvider, $stateProvider,   $urlRouterProvider){
 
-    $qProvider.errorOnUnhandledRejections(false);
+    //$qProvider.errorOnUnhandledRejections(false);
 
     $urlRouterProvider.otherwise('/app/supplier_dashboard');
 

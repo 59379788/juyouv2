@@ -205,7 +205,7 @@ var router = function($urlRouterProvider, $stateProvider){
     })
 
 
-    //接口入参
+    //接口入参列表
     .state('app.sys_interface_req', {
         url: "/sys/interfacereq/:id",
         views: {
@@ -218,11 +218,67 @@ var router = function($urlRouterProvider, $stateProvider){
             tableconfig : function(tableservice){
                 return tableservice.tableconfig();
             },
-            // urllist : function(sysservice){
-            //     return sysservice.urllist();
-            // }
         }
     })
+
+    //接口入参创建
+    .state('app.sys_interfacereq_create', {
+        url: "/sys/interfacereqcreate/:id",
+        views: {
+            'main@' : {
+                template : require('../996tpl/views/form.html'),
+                controller : 'interfacereqcreate',
+            }
+        },
+        resolve:{
+            formconfig : function(formservice){
+                return formservice.formconfig();
+            },
+            reqmodel : function(sysservice){
+                return sysservice.reqmodel;
+            }
+        }
+    })
+
+
+    //接口入参详情
+    .state('app.sys_interfacereq_info', {
+        url: "/sys/interfacereqinfo/:id",
+        views: {
+            'main@' : {
+                template : require('../996tpl/views/form.html'),
+                controller : 'interfacereqinfo',
+            }
+        },
+        resolve:{
+            formconfig : function(formservice){
+                return formservice.formconfig();
+            },
+            reqmodel : function(sysservice){
+                return sysservice.reqmodel;
+            }
+        }
+    })
+
+    //接口入参编辑
+    .state('app.sys_interfacereq_edit', {
+        url: "/sys/interfacereqedit/:id",
+        views: {
+            'main@' : {
+                template : require('../996tpl/views/form.html'),
+                controller : 'interfacereqedit',
+            }
+        },
+        resolve:{
+            formconfig : function(formservice){
+                return formservice.formconfig();
+            },
+            reqmodel : function(sysservice){
+                return sysservice.reqmodel;
+            }
+        }
+    })
+
 
 
     //接口出参
@@ -230,19 +286,79 @@ var router = function($urlRouterProvider, $stateProvider){
         url: "/sys/interfaceres/:id",
         views: {
             'main@' : {
-                template : require('./views/interfaceres.html'),
+                template : require('../996tpl/views/table.html'),
                 controller : 'interfaceres',
             }
         },
         resolve:{
-            // tableconfig : function(tableservice){
-            //     return tableservice.tableconfig();
-            // },
-            // urllist : function(sysservice){
-            //     return sysservice.urllist();
-            // }
+            tableconfig : function(tableservice){
+                return tableservice.tableconfig();
+            },
         }
     })
+
+
+    //接口出参创建
+    .state('app.sys_interfaceres_create', {
+        url: "/sys/interfacerescreate/:id",
+        views: {
+            'main@' : {
+                template : require('../996tpl/views/form.html'),
+                controller : 'interfacerescreate',
+            }
+        },
+        resolve:{
+            formconfig : function(formservice){
+                return formservice.formconfig();
+            },
+            resmodel : function(sysservice){
+                return sysservice.resmodel;
+            }
+        }
+    })
+
+
+    //接口出参详情
+    .state('app.sys_interfaceres_info', {
+        url: "/sys/interfaceresinfo/:id",
+        views: {
+            'main@' : {
+                template : require('../996tpl/views/form.html'),
+                controller : 'interfaceresinfo',
+            }
+        },
+        resolve:{
+            formconfig : function(formservice){
+                return formservice.formconfig();
+            },
+            resmodel : function(sysservice){
+                return sysservice.resmodel;
+            }
+        }
+    })
+
+    //接口出参编辑
+    .state('app.sys_interfaceres_edit', {
+        url: "/sys/interfaceresedit/:id",
+        views: {
+            'main@' : {
+                template : require('../996tpl/views/form.html'),
+                controller : 'interfaceresedit',
+            }
+        },
+        resolve:{
+            formconfig : function(formservice){
+                return formservice.formconfig();
+            },
+            resmodel : function(sysservice){
+                return sysservice.resmodel;
+            }
+        }
+    })
+
+
+
+
     
  	//创建接口
     .state('app.sys_interface_create', {

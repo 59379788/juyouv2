@@ -346,6 +346,96 @@ var service = function($resource, $q){
     ];
 
 
+
+
+    var reqmodel = [
+        // {
+        //     'title' : 'key',
+        //     'id' : 'key_code',
+        //     'type' : 'text',
+        //     'required' : true,
+        //     'placeholder' : '必填',
+        // },
+        {
+            'title' : 'key',
+            'id' : 'key_code',
+            'type' : 'text',
+            'required' : true,
+            'placeholder' : '必填',
+        },
+        {
+            'title' : 'key名称',
+            'id' : 'key_name',
+            'type' : 'text',
+            'required' : true,
+            'placeholder' : '必填',
+        },
+        {
+            'title' : '列类型',
+            'id' : 'key_type',
+            'type' : 'select',
+            'value' : '0',
+            'info' : [
+                {'name' : '字符串', 'value' : '0'},
+                {'name' : '整型', 'value' : '1'},
+            ],
+        },
+        {
+            'title' : '必填',
+            'id' : 'required',
+            'type' : 'switch',
+            'value' : '1',
+            'open' : '0',
+            'close' : '1',
+        },
+        {
+            'title' : '数据类型',
+            'id' : 'data_type',
+            'type' : 'select',
+            'value' : '*',
+            'info' : [
+                {'name' : '*', 'value' : '*'},
+                {'name' : 'n', 'value' : 'n'},
+                {'name' : 's', 'value' : 's'},
+                {'name' : 'p', 'value' : 'p'},
+                {'name' : 'm', 'value' : 'm'},
+                {'name' : 'e', 'value' : 'e'},
+                {'name' : 'url', 'value' : 'url'},
+            ],
+        },
+    ];
+
+
+
+    var resmodel = [
+        {
+            'title' : 'key',
+            'id' : 'key_code',
+            'type' : 'text',
+            'required' : true,
+            'placeholder' : '必填',
+        },
+        {
+            'title' : 'key名称',
+            'id' : 'key_name',
+            'type' : 'text',
+            'required' : true,
+            'placeholder' : '必填',
+        },
+        {
+            'title' : '数据字典所用类型',
+            'id' : 'dict_type',
+            'type' : 'select',
+            'value' : '0',
+            'info' : [
+                {'name' : '字符串', 'value' : '0'},
+                {'name' : '整型', 'value' : '1'},
+            ],
+        },
+        
+    ];
+
+
    
     return {
 
@@ -360,6 +450,14 @@ var service = function($resource, $q){
         },
         urlsave : function(){
             return $resource(urlsave, {}, {});
+        },
+
+
+        reqmodel : function(){
+            return reqmodel;
+        },
+        resmodel : function(){
+            return resmodel;
         },
 
 

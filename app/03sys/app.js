@@ -8,7 +8,15 @@ App.controller('interfacecreate',require('./controllers/interfacecreate'));
 App.controller('interfaceinfo',require('./controllers/interfaceinfo'));
 App.controller('interfaceedit',require('./controllers/interfaceedit'));
 App.controller('interfacereq',require('./controllers/interfacereq'));
+App.controller('interfacereqcreate',require('./controllers/interfacereqcreate'));
+App.controller('interfacereqinfo',require('./controllers/interfacereqinfo'));
+App.controller('interfacereqedit',require('./controllers/interfacereqedit'));
+
+
 App.controller('interfaceres',require('./controllers/interfaceres'));
+App.controller('interfacerescreate',require('./controllers/interfacerescreate'));
+App.controller('interfaceresinfo',require('./controllers/interfaceresinfo'));
+App.controller('interfaceresedit',require('./controllers/interfaceresedit'));
 
 App.controller('systemlist',require('./controllers/systemlist'));
 App.controller('systemcreate',require('./controllers/systemcreate'));

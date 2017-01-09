@@ -1,15 +1,17 @@
 module.exports = function($scope, $state, $stateParams, tableconfig){
 
+	console.log($stateParams.id);
+
 	tableconfig.start($scope, {
-		'url' : '/api/as/sc/sysfunreq/getById',
+		'url' : '/api/as/sc/sysfunreq/getReqList',
 		'para' : {'api_url_id' : $stateParams.id},
+		'page' : 'no',
 		'col' : [
-			{'title' : '系统编号', 'col' : 'system_code'},
-			{'title' : '系统名称', 'col' : 'system_name'},
-			{'title' : '备注', 'col' : 'system_remark'},
-			{'title' : '启用标志', 'col' : 'system_start_flag'},
-			{'title' : '排序', 'col' : 'system_sort'},
-			{'title' : '别名', 'col' : 'system_alias'},
+			{'title' : '主表关联id', 'col' : 'api_url_id'},
+			{'title' : 'key字段', 'col' : 'key_code'},
+			{'title' : '名称', 'col' : 'key_name'},
+			{'title' : '类型', 'col' : 'key_type'},
+			{'title' : '是否必填', 'col' : 'required'},
 			{'title' : '操作', 'col' : 'btn'},
 		],
 		'btn' : [
@@ -24,22 +26,22 @@ module.exports = function($scope, $state, $stateParams, tableconfig){
 		],
 		'title' : '入参列表',
 		'info' : {
-			'to' : 'app.sys_system_info',
+			'to' : 'app.sys_interfacereq_info',
 		},
 		'delete' : {
-			'url' : '/api/as/sc/syssystem/delete',
+			'url' : '/api/as/sc/sysfunreq/delete',
 		},
 		'edit' : {
-			'to' : 'app.sys_system_edit'
+			'to' : 'app.sys_interfacereq_edit'
 		},
 		'btns' : [
-			{'name' : '新增', 'click' : hehe}
+			{'name' : '新增', 'click' : create1}
 		]
 	});
 	$scope.table = tableconfig;
 
-	function hehe()
+	function create1()
 	{
-		alert('hehe');
+		$state.go('app.sys_interfacereq_create' , {'id' : $stateParams.id})
 	}
 };

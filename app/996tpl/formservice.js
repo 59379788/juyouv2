@@ -110,6 +110,7 @@ var service = function($q, $http, $resource, $state){
         //元素数组
         'elements' : [],
         'result' : {},
+        'res' : {},
         'save' : function(){},
         'dateshow' : {},
         'title' : '',
@@ -125,6 +126,7 @@ var service = function($q, $http, $resource, $state){
 
         form.elements = [];
         form.result = {};
+        form.res = {};
         form.dateshow = {};
         form.title = '';
         form.formtitle = '';
@@ -158,7 +160,8 @@ var service = function($q, $http, $resource, $state){
         // 1.方法：可以直接传入方法，通过方法参数可以取得页面表单数据对象
         // 2.对象：url : 提交接口地址。
         //        to : 提交后的跳转地址。
-        //        para : 跳转后带的参数。
+        //        para : 保存参数。
+        //        urlPara : 跳转后带的参数
         //------------- 提交(save) --------------------------------//
         if(angular.isFunction(config.save))
         {
@@ -171,10 +174,19 @@ var service = function($q, $http, $resource, $state){
                 {
                     angular.extend(item, config.save.para)
                 }
+
+                var urlpara = {};
+
+                if(angular.isDefined(config.save.urlPara))
+                {
+                    urlpara = angular.isObject(config.save.urlPara) ? 
+                    config.save.urlPara : config.save.urlPara(form.res);
+                }
+                
                 $resource(config.save.url, {}, {}).save(item, function(res){
                     console.log(res);
                     if(res.errcode === 0){
-                        $state.go(config.save.to, config.save.para);
+                        $state.go(config.save.to, urlpara);
                     }else{
                         alert(res.errmsg);
                     }
@@ -198,6 +210,7 @@ var service = function($q, $http, $resource, $state){
         {
             $resource(config.info.url, {}, {}).save(config.info.para, function(res){
                 console.log(res);
+                form.res = res;
                 if(res.errcode === 0){
                     init(elements, res);
                 }else{
