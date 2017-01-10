@@ -23,13 +23,13 @@ module.exports = function($scope, tableconfig, $state){
 		],
 		'title' : '景区列表',
 		'info' : {
-			'to' : 'app.view_info',
+			'to' : 'app.tickettype_info',
 		},
 		'delete' : {
 			'url' : '/api/ac/tc/placeview/delete',
 		},
 		'edit' : {
-			'to' : 'app.view_edit'
+			'to' : 'app.tickettype_edit'
 		}
 	});
 	$scope.table = tableconfig;

@@ -109,7 +109,7 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
                     para['id'] = item.id;
                 }
                 $resource(config.delete.url, {}, {}).save(para, function(res){
-                    console.log(res);
+                    //console.log(res);
                     if(res.errcode === 0){
                         vm.search();
                     }else{
@@ -161,9 +161,7 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
             }
         }
 
-        console.log(vm.searchformarr);
-
-
+        //console.log(vm.searchformarr);
 
         vm.dtOptions = DTOptionsBuilder.newOptions()
 
@@ -246,8 +244,8 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
     function rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
         // Unbind first in order to avoid any duplicate handler (see https://github.com/l-lin/angular-datatables/issues/87)
         
-        console.log(nRow);
-        console.log(iDisplayIndex);
+        //console.log(nRow);
+        //console.log(iDisplayIndex);
         $('td', nRow).unbind('click');
         $('td', nRow).bind('click', function() {
             vm.scope.$apply(function() {
@@ -377,7 +375,6 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
             var pageSize = 1;
             var start = 0;
             var length = 0;
-            console.log(aoData);
             for(var i = 0; i < aoData.length; i++)
             {
                var tmp = aoData[i];
@@ -391,7 +388,7 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
         
         //----- 分页参数 ---------------------------//
 
-        console.log(vm.searchformarr);
+        //console.log(vm.searchformarr);
         //------ 搜索参数 --------------------------//
         for(var i = 0; i < vm.searchformarr.length; i++)
         {
@@ -431,13 +428,20 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
            'data' : JSON.stringify(para) ,
             'success' : function(data){
                 console.log(data);
-                if(vm.page === 'yes')
+                if(data.errcode === 0)
                 {
-                    data['recordsTotal'] = data.data.totalRecord;
-                    data['recordsFiltered'] = data.data.totalRecord;
-                    //data['draw'] = data.data.pageNo;
+                    if(vm.page === 'yes')
+                    {
+                        data['recordsTotal'] = data.data.totalRecord;
+                        data['recordsFiltered'] = data.data.totalRecord;
+                    }
+                    fnCallback(data);
                 }
-                fnCallback(data);
+                else
+                {
+                    console.log(vm.url + '  ' +data.errmsg);
+                }
+                
             }
         });  
 

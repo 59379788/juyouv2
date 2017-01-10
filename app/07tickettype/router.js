@@ -5,17 +5,15 @@
 
 var router = function($urlRouterProvider, $stateProvider){
 
-
  	$stateProvider
 
-
-    //景区列表
-    .state('app.view_list', {
-        url: "/view/viewlist.html",
+   //票种列表
+    .state('app.tickettype_list', {
+        url: "/tickettype/list.html",
         views: {
             'main@' : {
                 template : require('../996tpl/views/table.html'),
-                controller : 'viewlist',
+                controller : 'tickettypelist',
             }
         },
         resolve:{
@@ -25,71 +23,62 @@ var router = function($urlRouterProvider, $stateProvider){
         }
     })
     
-    //创建景区
-    .state('app.view_create', {
-        url: "/view/viewcreate.html",
+    //创建票种
+    .state('app.tickettype_create', {
+        url: "/tickettype/create.html",
         views: {
             'main@' : {
                 template : require('../996tpl/views/form.html'),
-                controller : 'viewcreate',
+                controller : 'tickettypecreate',
             }
         },
         resolve:{
             formconfig : function(formservice){
                 return formservice.formconfig();
             },
-            viewmodel : function(viewservice){
-                return viewservice.viewmodel;
+            model : function(tickettypeservice){
+                return tickettypeservice.model;
             }
         }
     })
 
-
-
-
-    //系统详情
-    .state('app.view_info', {
-        url: "/sys/viewinfo/:id",
+    //票种详情
+    .state('app.tickettype_info', {
+        url: "/tickettype/info/:id",
         views: {
             'main@' : {
                 template : require('../996tpl/views/form.html'),
-                controller : 'viewinfo',
+                controller : 'tickettypeinfo',
             }
         },
         resolve:{
             formconfig : function(formservice){
                 return formservice.formconfig();
             },
-            viewmodel : function(viewservice){
-                return viewservice.viewmodel;
+            model : function(tickettypeservice){
+                return tickettypeservice.model;
             }
         }
     })
 
-
-
-    //景区编辑
-    .state('app.view_edit', {
-        url: "/sys/viewedit/:id",
+    //票种编辑
+    .state('app.tickettype_edit', {
+        url: "/tickettype/edit/:id",
         views: {
             'main@' : {
                 template : require('../996tpl/views/form.html'),
-                controller : 'viewedit',
+                controller : 'tickettypeedit',
             }
         },
         resolve:{
             formconfig : function(formservice){
                 return formservice.formconfig();
             },
-            viewmodel : function(viewservice){
-                return viewservice.viewmodel;
+            model : function(tickettypeservice){
+                return tickettypeservice.model;
             }
         }
     })
-
-
-    
-
 
 	;
 

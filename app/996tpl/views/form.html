@@ -190,7 +190,39 @@
           <div class="line line-dashed b-b line-lg pull-in"></div>
         </div>
 
-        
+
+        <div ng-if="ele.type == 'image'">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ele.title}}</label>
+            <div class="col-sm-3">
+              <img ng-src="{{form.result[ele.id]}}" width="250" height="150" 
+              ng-model="form.result[ele.id]">
+              <input type="file" nv-file-select 
+                uploader="form.imageshow[ele.id]['uploader']" />
+            </div>
+            <div class="col-sm-7">
+              <div class="alert alert-info"
+                ng-show="ele.tip !== undefined"
+              >
+                {{ele.tip}}
+              </div>
+              <ul class="list-group">
+                  <li class="list-group-item" 
+                  ng-repeat="item in form.imageshow[ele.id].uploader.queue">
+                      文件名: <span ng-bind="item.file.name"></span>
+                      <button type="button" class="btn btn-default btn-xs ml10"  
+                      ng-click="item.upload()"><span class="glyphicon glyphicon-upload"></span> 上传</button>
+                      <div class="progress mt10">
+                          <div class="progress-bar" role="progressbar" ng-style="{ 'width': form.imageshow[ele.id].uploader.progress + '%' }"></div>
+                      </div>
+                  </li>
+              </ul>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
+
 
       </div>
         

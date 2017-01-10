@@ -4,8 +4,7 @@
  */
 var service = function($resource, $q){
 
-    //view模型
-    var viewmodel = [
+    var model = [
         {
             'title' : '系统编号',
             'id' : 'system_code',
@@ -49,11 +48,10 @@ var service = function($resource, $q){
 
     ];
 
-   
     return {
 
-        viewmodel : function(){
-            return viewmodel;
+        model : function(){
+            return model;
         },
        
     };

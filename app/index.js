@@ -7,6 +7,7 @@ require('angular-touch');
 require('ngstorage');
 require('angular-ui-router');
 require('angular-bootstrap');
+require('angular-file-upload');
 
 require('ui-select');
 require('../node_modules/ui-select/dist/select.min.css');
@@ -71,6 +72,8 @@ require('./02product/app');
 require('./03sys/app');
 require('./04permission/app');
 require('./05login/app');
+require('./06view/app');
+require('./07tickettype/app');
 require('./995util/app');
 require('./996tpl/app');
 require('./997test/app');
@@ -126,6 +129,7 @@ var juyou = angular.module('app', [
 
     'textAngular',
     'treeControl',
+    'angularFileUpload',
 
     'pageframework',
     'dashboard',
@@ -133,6 +137,8 @@ var juyou = angular.module('app', [
     'sys',
     'permission',
     'login',
+    'view',
+    'tickettype',
     'util',
     'juyoutpl',
     'test', 

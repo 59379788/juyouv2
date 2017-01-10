@@ -104,6 +104,35 @@
                 <span>产品管理1</span>
               </a>
             </li>
+
+            <li  >
+              <a href class="auto">
+                <span class="pull-right text-muted">
+                  <i class="fa fa-fw fa-angle-right text"></i>
+                  <i class="fa fa-fw fa-angle-down text-active"></i>
+                </span>
+                <span class="font-bold">票种管理</span>
+              </a>
+              <ul class="nav nav-sub dk">
+                <li class="nav-sub-header">
+                  <a href>
+                    <span>票种管理</span>
+                  </a>
+                </li>
+                <li ui-sref-active="active">
+                  <a ui-sref="app.tickettype_list">
+                    <span>列表</span>
+                  </a>
+                </li>
+                <li ui-sref-active="active">
+                  <a ui-sref="app.tickettype_create">
+                    <span>创建</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
             <li ui-sref-active="active">
               <a ui-sref="app.product_template">
                 <span>创建新产品</span>
@@ -297,12 +326,46 @@
         </li>
 
 
-        <li ui-sref-active="active">
+        <!-- <li ui-sref-active="active">
           <a ui-sref="login">
             <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
             <span class="font-bold" >登陆</span>
           </a>
+        </li> -->
+
+
+
+        <li>
+          <a href class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <i class="glyphicon glyphicon-th-large icon text-success"></i>
+            <span class="font-bold">景区管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span>景区管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.view_create">
+                <span>创建</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.view_list">
+                <span>列表</span>
+              </a>
+            </li>
+            
+          </ul>
         </li>
+
+
+
 
         <li ui-sref-active="active">
           <a ui-sref="app.calendar">

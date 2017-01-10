@@ -6,7 +6,7 @@ module.exports = function($scope, formconfig, viewmodel){
 		'elements' : viewmodel(),
 		'save' : {
 			'url' : '/api/ac/tc/placeview/create',
-			'to' : 'app.sys_view_list'
+			'to' : 'app.view_list'
 		}
 	}, $scope);
 

@@ -103,7 +103,7 @@
 
 
 
-var service = function($q, $http, $resource, $state){
+var service = function($q, $http, $resource, $state, FileUploader){
 
 
     var form = {
@@ -113,6 +113,7 @@ var service = function($q, $http, $resource, $state){
         'res' : {},
         'save' : function(){},
         'dateshow' : {},
+        'imageshow' : {},
         'title' : '',
         'formtitle' : '',
         'scope' : {},
@@ -128,6 +129,7 @@ var service = function($q, $http, $resource, $state){
         form.result = {};
         form.res = {};
         form.dateshow = {};
+        form.imageshow = {};
         form.title = '';
         form.formtitle = '';
         form.scope = {};
@@ -325,6 +327,29 @@ var service = function($q, $http, $resource, $state){
                 else if(tmp.type === 'textarea')
                 {
                     form.result[tmp.id] = tmp.value || '';
+                }
+                else if(tmp.type === 'image')
+                {
+                    form.result[tmp.id] = tmp.value || '';
+
+                    form.imageshow[tmp.id] = {
+                        'uploader' : new FileUploader({
+                            url: 'http://cl.juyouhx.com/oss.php/oss/webuploader1?topdir=aa&selfdir=bb'
+                        })
+                    };
+
+                    form.imageshow[tmp.id].uploader.filters.push({
+                        name: 'imageFilter',
+                        fn: function(item /*{File|FileLikeObject}*/, options) {
+                            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+                        }
+                    }); 
+
+                    form.imageshow[tmp.id].uploader.onSuccessItem = function(fileItem, response, status, headers) {
+                        form.result[tmp.id] = response.savename;
+                    };
+
                 }
             }
         });
