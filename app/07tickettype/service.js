@@ -81,13 +81,6 @@ var service = function($resource, $q){
             ],
         },
         {
-            'title' : '系统名称',
-            'id' : 'name',
-            'type' : 'text',
-            'required' : true,
-            'placeholder' : '必填',
-        },
-        {
             'title' : '预定说明',
             'id' : 'book_info',
             'type' : 'textarea',
