@@ -1,14 +1,12 @@
 module.exports = function($scope, tableconfig, $state){
 
 	tableconfig.start($scope, {
-		'url' : '/api/ac/tc/placeview/list',
+		'url' : '/api/ac/tc/placeView/list',
 		'col' : [
-			{'title' : '系统编号', 'col' : 'system_code'},
-			{'title' : '系统名称', 'col' : 'system_name'},
-			{'title' : '备注', 'col' : 'system_remark'},
-			{'title' : '启用标志', 'col' : 'system_start_flag'},
-			{'title' : '排序', 'col' : 'system_sort'},
-			{'title' : '别名', 'col' : 'system_alias'},
+			{'title' : '类型', 'col' : 'type'},
+			{'title' : '名称', 'col' : 'name'},
+			{'title' : '编号', 'col' : 'code'},
+			{'title' : '城市', 'col' : 'city'},
 			{'title' : '操作', 'col' : 'btn'},
 		],
 		'btn' : [
@@ -17,16 +15,17 @@ module.exports = function($scope, tableconfig, $state){
 			{'title' : '删除', 'onclick' : 'delete'},
 		],
 		'search' : [
-			{'title' : '系统编号', 'type' : 'txt', 'name' : 'system_code', 'show' : true},
-			{'title' : '系统名称', 'type' : 'txt', 'name' : 'system_name', 'show' : true},
-			{'title' : '别名', 'type' : 'txt', 'name' : 'system_alias'},
+			{'title' : '名称', 'type' : 'txt', 'name' : 'name', 'show' : true},
+			{'title' : '编号', 'type' : 'txt', 'name' : 'code', 'show' : true},
+			{'title' : '城市', 'type' : 'txt', 'name' : 'city'},
+			{'title' : '类型', 'type' : 'txt', 'name' : 'type'},
 		],
 		'title' : '景区列表',
 		'info' : {
 			'to' : 'app.view_info',
 		},
 		'delete' : {
-			'url' : '/api/ac/tc/placeview/delete',
+			'url' : '/api/ac/tc/placeView/delete',
 		},
 		'edit' : {
 			'to' : 'app.view_edit'

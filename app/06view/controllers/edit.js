@@ -7,13 +7,13 @@ module.exports = function($scope, formconfig, $stateParams, viewmodel){
 		'formtitle' : '景区基本信息',
 		'elements' : viewmodel(),
 		'info' : {
-			'url' : '/api/ac/tc/placeview/info',
+			'url' : '/api/ac/tc/placeView/info',
 			'para' : {'id' : id}
 		},
 		'save' : {
-			'url' : '/api/ac/tc/placeview/create',
+			'url' : '/api/ac/tc/placeView/update',
 			'to' : 'app.view_list',
-			'para' : {'id' : id}
+			'para' : {'id' : id, 'type' : 'J'}
 		}
 	}, $scope);
 

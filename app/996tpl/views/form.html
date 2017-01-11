@@ -198,7 +198,8 @@
               <img ng-src="{{form.result[ele.id]}}" width="250" height="150" 
               ng-model="form.result[ele.id]">
               <input type="file" nv-file-select 
-                uploader="form.imageshow[ele.id]['uploader']" />
+                uploader="form['imageshow'][ele.id]['uploader']" />
+              
             </div>
             <div class="col-sm-7">
               <div class="alert alert-info"

@@ -118,12 +118,11 @@ var service = function($q, $http, $resource, $state, FileUploader){
         'formtitle' : '',
         'scope' : {},
         'showbutton' : true,
+        'before' : {},
     };
 
     
     form.start = function(config, scope){
-
-        console.log(config);
 
         form.elements = [];
         form.result = {};
@@ -134,6 +133,7 @@ var service = function($q, $http, $resource, $state, FileUploader){
         form.formtitle = '';
         form.scope = {};
         form.showbutton = true;
+        form.before = {};
 
 
         var config = angular.extend({}, angular.isObject(config) ? config : {});
@@ -184,6 +184,8 @@ var service = function($q, $http, $resource, $state, FileUploader){
                     urlpara = angular.isObject(config.save.urlPara) ? 
                     config.save.urlPara : config.save.urlPara(form.res);
                 }
+
+                console.log(item);
                 
                 $resource(config.save.url, {}, {}).save(item, function(res){
                     console.log(res);
@@ -195,6 +197,62 @@ var service = function($q, $http, $resource, $state, FileUploader){
                 });
             }
         }
+
+
+        //----------- 准备预先撸出需要的数据 -------------------//
+        for(var i = 0; i < elements.length; i++)
+        {
+            var tmp = elements[i];
+            if(tmp.type === 'select' && angular.isDefined(tmp.url))
+            {
+                form.before[tmp.id] = {};
+                form.before[tmp.id]['url'] = tmp.url;
+                form.before[tmp.id]['para'] = tmp.para;
+            }
+
+            if(tmp.type === 'image')
+            {
+                (function(tmp){
+
+                    var uploader = new FileUploader({
+                        url: 'http://cl.juyouhx.com/oss.php/oss/webuploader1?topdir=aa&selfdir=bb'
+                    });
+
+                    form.imageshow[tmp.id] = {
+                        'uploader' : uploader
+                    };
+
+                    uploader.filters.push({
+                        name: 'imageFilter',
+                        fn: function(item, options) {
+                            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+                        }
+                    }); 
+
+                    uploader.onSuccessItem = function(fileItem, response, status, headers) {
+                        form.result[tmp.id] = response.savename;
+                    };
+
+                })(tmp);
+            }
+
+            if(tmp.type === 'date1')
+            {
+                var label = '';
+                if(tmp.value === 'now'){
+                    label = date2str(new Date());
+                }
+                
+                form.dateshow[tmp.id] = {
+                    'label' : label,
+                    'opened' : false,
+                };
+            }
+            
+        }
+        //----------- 准备预先撸出需要的数据 -------------------//
+
 
 
         //------------- 详情(info) --------------------------------//
@@ -243,27 +301,11 @@ var service = function($q, $http, $resource, $state, FileUploader){
 
     function init(elements, res){
 
-        console.log(elements);
-
-        //----------- 准备预先撸出需要的数据 -------------------//
-        var before = {};
-        for(var i = 0; i < elements.length; i++)
-        {
-            var tmp = elements[i];
-            if(tmp.type === 'select' && angular.isDefined(tmp.url))
-            {
-                before[tmp.id] = {};
-                before[tmp.id]['url'] = tmp.url;
-                before[tmp.id]['para'] = tmp.para;
-            }
-        }
-        //----------- 准备预先撸出需要的数据 -------------------//
-
-
+        //console.log(elements);
 
         //----------- 开始撸出需要的数据 -------------------//
         var beforedata = {};
-        angular.forEach(before, function (obj, key) {
+        angular.forEach(form.before, function (obj, key) {
             var para = {};
             obj.para || angular.extend(para, obj.para);
             beforedata[key] = $http(
@@ -305,7 +347,6 @@ var service = function($q, $http, $resource, $state, FileUploader){
                 }
                 else if(tmp.type === 'select')
                 {
-                    console.log(tmp.url);
 
                     if(angular.isDefined(tmp.url)){
                         tmp.info = arr[tmp.id].data.data;
@@ -313,13 +354,18 @@ var service = function($q, $http, $resource, $state, FileUploader){
 
                     form.result[tmp.id] = tmp.value || 0;
                 }
-                else if(tmp.type === 'date1')
-                {
-                    form.dateshow[tmp.id] = {
-                        'label' : tmp.value,
-                        'opened' : false,
-                    };
-                }
+                // else if(tmp.type === 'date1')
+                // {
+                //     var label = '';
+                //     if(tmp.value === 'now'){
+                //         label = date2str(new Date());
+                //     }
+                    
+                //     form.dateshow[tmp.id] = {
+                //         'label' : label,
+                //         'opened' : false,
+                //     };
+                // }
                 else if(tmp.type === 'switch')
                 {
                     form.result[tmp.id] = tmp.value || '';
@@ -331,27 +377,37 @@ var service = function($q, $http, $resource, $state, FileUploader){
                 else if(tmp.type === 'image')
                 {
                     form.result[tmp.id] = tmp.value || '';
+                    //console.log(tmp);
 
-                    form.imageshow[tmp.id] = {
-                        'uploader' : new FileUploader({
-                            url: 'http://cl.juyouhx.com/oss.php/oss/webuploader1?topdir=aa&selfdir=bb'
-                        })
-                    };
+                    // (function(tmp){
 
-                    form.imageshow[tmp.id].uploader.filters.push({
-                        name: 'imageFilter',
-                        fn: function(item /*{File|FileLikeObject}*/, options) {
-                            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-                        }
-                    }); 
+                    //     var uploader = new FileUploader({
+                    //         url: 'http://cl.juyouhx.com/oss.php/oss/webuploader1?topdir=aa&selfdir=bb'
+                    //     });
 
-                    form.imageshow[tmp.id].uploader.onSuccessItem = function(fileItem, response, status, headers) {
-                        form.result[tmp.id] = response.savename;
-                    };
+                    //     form.imageshow[tmp.id] = {
+                    //         'uploader' : uploader
+                    //     };
+
+                    //     uploader.filters.push({
+                    //         name: 'imageFilter',
+                    //         fn: function(item, options) {
+                    //             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                    //             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+                    //         }
+                    //     }); 
+
+                    //     uploader.onSuccessItem = function(fileItem, response, status, headers) {
+                    //         form.result[tmp.id] = response.savename;
+                    //     };
+
+                    // })(tmp);
 
                 }
             }
+
+
+            console.log(form);
         });
         //----------- 开始撸出需要的数据 -------------------//
     }

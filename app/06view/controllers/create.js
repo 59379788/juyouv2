@@ -5,8 +5,9 @@ module.exports = function($scope, formconfig, viewmodel){
 		'formtitle' : '景区基本信息',
 		'elements' : viewmodel(),
 		'save' : {
-			'url' : '/api/ac/tc/placeview/create',
-			'to' : 'app.view_list'
+			'url' : '/api/ac/tc/placeView/create',
+			'to' : 'app.view_list',
+			'para' : {'type' : 'J'}
 		}
 	}, $scope);
 
