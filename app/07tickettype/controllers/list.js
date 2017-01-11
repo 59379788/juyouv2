@@ -1,7 +1,7 @@
 module.exports = function($scope, tableconfig, $state){
 
 	tableconfig.start($scope, {
-		'url' : '/api/ac/tc/placeview/list',
+		'url' : '/api/ac/tc/ticketType/list',
 		'col' : [
 			{'title' : '系统编号', 'col' : 'system_code'},
 			{'title' : '系统名称', 'col' : 'system_name'},

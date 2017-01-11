@@ -225,6 +225,53 @@
 
 
 
+        <div ng-if="ele.type == 'button'">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" 
+            for={{ele.id}}>{{ele.title}}</label>
+            <div class="col-sm-10">
+              <button class="btn m-b-xs w-xs btn-primary"
+                type="button"
+                ng-repeat="item in ele.info"
+                ng-click="item.btnclick(form)"
+              >{{item.label}}</button>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
+
+
+        <div ng-if="ele.type == 'table'">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" 
+            for={{ele.id}}>{{ele.title}}</label>
+            <div class="col-sm-10">
+              <table class="table table-striped m-b-none">
+                <thead>
+                  <tr>
+                    <th ng-repeat="c in ele.col">{{c.title}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="d in form.result[ele.id]">
+                    <td ng-repeat="c in ele.col">
+                      <div ng-if="c.col !== undefined" 
+                      >{{d[c.col]}}</div>
+                      <button class="btn btn-xs btn-primary"
+                        type="button"
+                        ng-if="c.col === undefined"
+                        ng-click="c.click(d)"
+                      >{{c.clickname}}</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+        </div>
+
       </div>
         
        

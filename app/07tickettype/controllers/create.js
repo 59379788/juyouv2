@@ -5,7 +5,7 @@ module.exports = function($scope, formconfig, model){
 		'formtitle' : '票种基本信息',
 		'elements' : model(),
 		'save' : {
-			'url' : '/api/ac/tc/placeview/create',
+			'url' : '/api/ac/tc/ticketType/create',
 			'to' : 'app.tickettype_list'
 		}
 	}, $scope);

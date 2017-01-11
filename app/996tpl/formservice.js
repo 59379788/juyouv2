@@ -118,7 +118,10 @@ var service = function($q, $http, $resource, $state, FileUploader){
         'formtitle' : '',
         'scope' : {},
         'showbutton' : true,
-        'before' : {},
+        'before' : {},      //预先读数据的地址
+        'beforedata' : {},  //预先读出来的数据，
+        'tableshow' : {},
+
     };
 
     
@@ -134,6 +137,8 @@ var service = function($q, $http, $resource, $state, FileUploader){
         form.scope = {};
         form.showbutton = true;
         form.before = {};
+        form.beforedata = {};
+        form.tableshow = {};
 
 
         var config = angular.extend({}, angular.isObject(config) ? config : {});
@@ -317,6 +322,8 @@ var service = function($q, $http, $resource, $state, FileUploader){
         });
 
         $q.all(beforedata).then(function(arr){
+            console.log(arr);
+            form.beforedata = arr;
             for(var i = 0; i < elements.length; i++)
             {
                 var tmp = elements[i];
@@ -354,18 +361,6 @@ var service = function($q, $http, $resource, $state, FileUploader){
 
                     form.result[tmp.id] = tmp.value || 0;
                 }
-                // else if(tmp.type === 'date1')
-                // {
-                //     var label = '';
-                //     if(tmp.value === 'now'){
-                //         label = date2str(new Date());
-                //     }
-                    
-                //     form.dateshow[tmp.id] = {
-                //         'label' : label,
-                //         'opened' : false,
-                //     };
-                // }
                 else if(tmp.type === 'switch')
                 {
                     form.result[tmp.id] = tmp.value || '';
@@ -377,32 +372,10 @@ var service = function($q, $http, $resource, $state, FileUploader){
                 else if(tmp.type === 'image')
                 {
                     form.result[tmp.id] = tmp.value || '';
-                    //console.log(tmp);
-
-                    // (function(tmp){
-
-                    //     var uploader = new FileUploader({
-                    //         url: 'http://cl.juyouhx.com/oss.php/oss/webuploader1?topdir=aa&selfdir=bb'
-                    //     });
-
-                    //     form.imageshow[tmp.id] = {
-                    //         'uploader' : uploader
-                    //     };
-
-                    //     uploader.filters.push({
-                    //         name: 'imageFilter',
-                    //         fn: function(item, options) {
-                    //             var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                    //             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-                    //         }
-                    //     }); 
-
-                    //     uploader.onSuccessItem = function(fileItem, response, status, headers) {
-                    //         form.result[tmp.id] = response.savename;
-                    //     };
-
-                    // })(tmp);
-
+                }
+                else if(tmp.type === 'table')
+                {
+                    form.result[tmp.id] = tmp.data || [];
                 }
             }
 

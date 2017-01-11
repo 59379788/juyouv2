@@ -80,9 +80,9 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
             dataprop = config.dataprop || 'data.results',
             page = vm.page = config.page || 'yes',
             title = vm.title = config.title || '',
-            btns = vm.btns = config.btns || [];
+            btns = vm.btns = config.btns || [] ,
             multi = vm.multi = config.multi || false,   //多表格情况
-
+            
             //--------------  详情默认方法 -------------------------//
             info = vm.info = config.info ? function(item){
                 var para = {};
@@ -150,7 +150,7 @@ var service = function($q, $http, $resource, DTOptionsBuilder, DTColumnBuilder, 
         var tableDOM = 't<"row"<"col-xs-6"i><"col-xs-6"p>>';
         if(page === 'no') {
             dataprop = 'data';
-            tableDOM = 't<"row">'
+            tableDOM = 't<"row">';
         }
         //----------- 搜索 -----------------------//
         //初始化搜索项
